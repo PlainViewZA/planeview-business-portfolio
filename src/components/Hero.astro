@@ -1,24 +1,127 @@
 ---
+// Hero Component - Plane View Collective
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const { 
+  title = 'Helping brands get noticed, understood, and remembered.',
+  subtitle = 'We step in to simplify the message and amplify the impact.',
+  ctaText = 'Start Your Project',
+  ctaHref = '/contact'
+} = Astro.props;
 ---
 
-<section class="relative min-h-[80vh] flex items-center bg-gradient-to-br from-indigo-50 via-white to-blue-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-indigo-950/30">
-  <div class="max-w-7xl mx-auto px-6 py-24">
-    <div class="max-w-3xl">
-      <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
-        Planeview
-        <span class="text-indigo-600 dark:text-indigo-400"> Business Solutions</span>
-      </h1>
-      <p class="text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 mb-10">
-        Driving measurable growth through strategy, innovation, and trusted partnerships.
-      </p>
-      <div class="flex flex-wrap gap-5">
-        <a href="/services" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition shadow-lg shadow-indigo-200/50">
-          Explore Services
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">{title}</h1>
+      <p class="hero-subtitle">{subtitle}</p>
+      <div class="hero-cta">
+        <a href={ctaHref} class="btn btn-primary">
+          {ctaText}
+          <span class="arrow">→</span>
         </a>
-        <a href="/portfolio" class="px-8 py-4 border-2 border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition font-medium">
-          View Portfolio
+        <a href="/work" class="btn btn-ghost">
+          View Our Work
         </a>
       </div>
     </div>
   </div>
+
+  <!-- Decorative Element -->
+  <div class="hero-decoration">
+    <div class="plane-path">
+      <svg width="100%" height="200" viewBox="0 0 1200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path 
+          d="M0 100 Q 300 50, 600 100 T 1200 100" 
+          stroke="var(--color-steel-blue)" 
+          stroke-width="2" 
+          stroke-dasharray="10 10"
+          opacity="0.2"
+        />
+      </svg>
+    </div>
+  </div>
 </section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: calc(80px + var(--spacing-3xl));
+    padding-bottom: var(--spacing-3xl);
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-jet-black);
+    margin: 0;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: 400;
+    color: var(--color-slate-grey);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-md);
+  }
+
+  /* Decorative Element */
+  .hero-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .plane-path {
+    opacity: 0.3;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 70vh;
+      padding-top: calc(60px + var(--spacing-2xl));
+    }
+
+    .hero-cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-cta .btn {
+      width: 100%;
+    }
+  }
+</style>
